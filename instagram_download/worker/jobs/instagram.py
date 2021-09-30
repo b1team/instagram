@@ -4,25 +4,33 @@ from bs4 import BeautifulSoup
 import requests
 
 from instagram_download.utils.logger import logger
-
-_HEADERS = {
-  'accept': '',
-  'cookie': '',
-  'user-agent': ''
-}
+from instagram_download.constants import *
 
 
 class InstagramScaper:
     def __init__(self) -> None:
-        self._headers = _HEADERS
-        self._session = requests.Session()
+        self.session = requests.Session()
+        self.cookies = None
+    
+    def login(self, username: str, password: str):
+        """Logs in to instagram."""
+        self.session.headers.update({'Referer': BASE_URL, 'user-agent': INSTAGRAM_APPLE})
+        req = self.session.get(BASE_URL)
+
+        self.session.headers.update({'X-CSRFToken': req.cookies['csrftoken']})
+
+        login_data = {'username': username, 'password': password}
+        login = self.session.post(LOGIN_URL, data=login_data, allow_redirects=True)
+        self.cookies = login.cookies
+        login_text = json.loads(login.text)
+        if login_text.get('authenticated') and login.status_code == 200:
+            self.session.headers.update({"user-agent": FIREFOX})
+        else:
+            logger.error('Login failed for ' + username)
 
     def _request_url(self, url) -> bytes:
         try:
-            response = self._session.get(
-                url,
-                headers=self._headers
-            )
+            response = self.session.get(url, cookies=self.cookies)
             response.raise_for_status()
         except requests.HTTPError:
             raise requests.HTTPError("Received non-200 status code.")

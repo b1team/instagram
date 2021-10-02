@@ -35,17 +35,13 @@ install:          ## Install the project in dev mode.
 .PHONY: format
 format:              ## Format code using black & isort.
 	$(ENV_PREFIX)isort instagram_download/
-	$(ENV_PREFIX)isort tests/
 	$(ENV_PREFIX)black instagram_download/
-	$(ENV_PREFIX)black tests/
 
 
 .PHONY: lint
 lint:             ## Run black, mypy, pylint linters.
 	$(ENV_PREFIX)isort --check-only instagram_download/
-	$(ENV_PREFIX)isort --check-only tests/
 	$(ENV_PREFIX)black --check instagram_download/
-	$(ENV_PREFIX)black --check tests/
 	$(ENV_PREFIX)pylint instagram_download/
 	$(ENV_PREFIX)mypy instagram_download/
 

@@ -21,7 +21,6 @@ ignore_missing_imports = true
 [tool.darker]
 src = [
     "instagram_download",
-    "tests"
 ]
 isort = true
 log_level = "INFO"

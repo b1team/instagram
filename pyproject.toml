@@ -1,0 +1,27 @@
+[tool.black]
+line-length = 120
+exclude = '''
+/(
+  \.toml
+  |\.sh
+  |\.git
+  |\.ini
+  |Dockerfile
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 120
+skip_gitignore = true
+
+[tool.mypy]
+ignore_missing_imports = true
+
+[tool.darker]
+src = [
+    "instagram_download",
+    "tests"
+]
+isort = true
+log_level = "INFO"

@@ -1,0 +1,14 @@
+version: "3.5"
+
+services:
+  workers:
+    build: .
+    command: instagram_download
+    env_file:
+      - .env
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "500M"
+          max-file: "5"

@@ -17,6 +17,9 @@ Changelog
 - Merge pull request #3 from vuonglv1612/master. [Tung Nguyen Tu]
 
   Restructure project
+
+0.2.0 (2021-10-01)
+------------------
 - Release: version 0.2.0 🚀 [vuonglv1612]
 - Feat: added Makfile, linting, formating, entrypoint into project.
   [vuonglv1612]

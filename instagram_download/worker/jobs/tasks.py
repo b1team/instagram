@@ -1,4 +1,4 @@
-from instagram_download.worker.worker import celery_app
+from instagram_download.celery_app import celery_app
 from instagram_download.worker.jobs.instagram import InstagramScaper
 from instagram_download.settings import InstagramUserConfig
 
